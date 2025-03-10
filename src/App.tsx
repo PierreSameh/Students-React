@@ -11,7 +11,7 @@ function App() {
 
 
   useEffect(() => {
-    getStudents().then(res => setStudents(res));
+    getStudents().then(res => setStudents(res)).catch(err => console.error(err));
   }, []);
 
   return (

@@ -39,9 +39,13 @@ function AddStudents({ students, setStudents }: Props) {
       alert("Please fill all the fields");
       return;
     }
+    try{
+      const data = await addStudent(formData);
+      setStudents([...students, data]);
+    }catch (error){
+      alert(error);
+    }
 
-    const data = await addStudent(formData);
-    setStudents([...students, data]);
     // Reset form after submission
     setFormData({
       id: students.length + 2, // Set ID dynamically
