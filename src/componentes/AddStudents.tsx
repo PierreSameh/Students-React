@@ -1,6 +1,7 @@
 import { Button, Paper, TextField } from "@mui/material";
 import { data, Student } from "../utils/data";
 import { useEffect, useState } from "react";
+import { addStudent } from "../api/Students";
 
 interface Props {
   students: Student[];
@@ -33,14 +34,14 @@ function AddStudents({ students, setStudents }: Props) {
   };
 
   // Handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     if (!formData.name || !formData.age || !formData.email || !formData.class) {
       alert("Please fill all the fields");
       return;
     }
 
-    setStudents([...students, formData]);
-
+    const data = await addStudent(formData);
+    setStudents([...students, data]);
     // Reset form after submission
     setFormData({
       id: students.length + 2, // Set ID dynamically
